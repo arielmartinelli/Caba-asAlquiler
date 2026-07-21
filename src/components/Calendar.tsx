@@ -53,7 +53,6 @@ export default function Calendar({
     return `$ ${(priceARS * nights).toLocaleString('es-AR')} ARS`;
   };
 
-  // Convert blocked date sources into structured ranges
   const isDateBlocked = (date: Date): { blocked: boolean; reason?: string } => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -62,7 +61,6 @@ export default function Calendar({
       return { blocked: true, reason: 'Fecha pasada' };
     }
 
-    // Check APPROVED / PENDING reservations
     for (const res of reservations) {
       const start = new Date(res.startDate);
       const end = new Date(res.endDate);
@@ -73,7 +71,6 @@ export default function Calendar({
       }
     }
 
-    // Check manual blocked dates
     for (const block of blockedDates) {
       const start = new Date(block.startDate);
       const end = new Date(block.endDate);
@@ -84,7 +81,6 @@ export default function Calendar({
       }
     }
 
-    // Check Google Calendar events
     for (const gcal of gcalEvents) {
       if (!gcal.start) continue;
       const start = new Date(gcal.start);
@@ -167,29 +163,29 @@ export default function Calendar({
           key={cloneDay.toISOString()}
           disabled={blocked || !isCurrentMonth}
           onClick={() => handleDateClick(cloneDay)}
-          className={`h-12 w-full rounded-xl flex flex-col items-center justify-center relative transition-all text-xs font-semibold ${
+          className={`h-11 w-full rounded-full flex flex-col items-center justify-center relative transition-all text-xs font-semibold ${
             !isCurrentMonth ? 'opacity-20 cursor-default' : ''
           } ${
             blocked
-              ? 'bg-rose-950/30 text-rose-400/50 line-through cursor-not-allowed border border-rose-900/20'
+              ? 'bg-slate-100 text-slate-300 line-through cursor-not-allowed border border-slate-200/50'
               : isSelectedStart || isSelectedEnd
-              ? 'gradient-gold text-slate-950 font-extrabold shadow-lg scale-105 z-10'
+              ? 'bg-rose-500 text-white font-extrabold shadow-md scale-105 z-10'
               : isInRange
-              ? 'bg-emerald-800/40 text-emerald-200 border border-emerald-500/30'
-              : 'hover:bg-emerald-600/20 text-slate-200 hover:text-white hover:scale-105 border border-white/5'
+              ? 'bg-rose-50 text-rose-900 border border-rose-200'
+              : 'hover:bg-slate-100 text-slate-800 hover:scale-105 border border-transparent'
           }`}
           title={blocked ? `No disponible: ${reason}` : format(cloneDay, 'dd MMMM yyyy', { locale: es })}
         >
           <span>{format(cloneDay, 'd')}</span>
           {blocked && isCurrentMonth && (
-            <Lock className="w-2.5 h-2.5 text-rose-400/70 absolute bottom-1" />
+            <Lock className="w-2.5 h-2.5 text-slate-400 absolute bottom-1" />
           )}
         </button>
       );
       day = addDays(day, 1);
     }
     rows.push(
-      <div key={day.toISOString()} className="grid grid-cols-7 gap-1.5">
+      <div key={day.toISOString()} className="grid grid-cols-7 gap-1">
         {days}
       </div>
     );
@@ -200,68 +196,68 @@ export default function Calendar({
     range.startDate && range.endDate ? differenceInDays(range.endDate, range.startDate) : 0;
 
   return (
-    <div className="glass-card p-6 rounded-3xl border border-white/10 space-y-6">
+    <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-6">
       
       {/* Header with Month Selector */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-white">
-          <CalendarIcon className="w-5 h-5 text-amber-400" />
-          <h3 className="font-bold text-lg capitalize">
+        <div className="flex items-center gap-2 text-slate-900">
+          <CalendarIcon className="w-5 h-5 text-rose-500" />
+          <h3 className="font-extrabold text-base capitalize">
             {format(currentMonth, 'MMMM yyyy', { locale: es })}
           </h3>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={prevMonth}
-            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors"
+            className="p-2 rounded-full hover:bg-slate-100 text-slate-700 transition-colors border border-slate-200"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             onClick={nextMonth}
-            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors"
+            className="p-2 rounded-full hover:bg-slate-100 text-slate-700 transition-colors border border-slate-200"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
 
       {/* Weekday headers */}
-      <div className="grid grid-cols-7 gap-1.5 text-center text-xs font-bold text-amber-400 uppercase tracking-wider">
-        <span>Lun</span>
-        <span>Mar</span>
-        <span>Mié</span>
-        <span>Jue</span>
-        <span>Vie</span>
-        <span>Sáb</span>
-        <span>Dom</span>
+      <div className="grid grid-cols-7 gap-1 text-center text-xs font-bold text-slate-400 uppercase tracking-wider">
+        <span>Lu</span>
+        <span>Ma</span>
+        <span>Mi</span>
+        <span>Ju</span>
+        <span>Vi</span>
+        <span>Sá</span>
+        <span>Do</span>
       </div>
 
       {/* Days Grid */}
-      <div className="space-y-1.5">{rows}</div>
+      <div className="space-y-1">{rows}</div>
 
       {/* Legend */}
-      <div className="flex flex-wrap items-center justify-between text-xs text-slate-400 pt-4 border-t border-white/10 gap-2">
+      <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-500 pt-4 border-t border-slate-100 gap-2">
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-emerald-600 border border-emerald-400"></span>
+          <span className="w-3 h-3 rounded-full bg-slate-100 border border-slate-300"></span>
           <span>Disponible</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-amber-400"></span>
+          <span className="w-3 h-3 rounded-full bg-rose-500"></span>
           <span>Seleccionado</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-rose-950 border border-rose-900"></span>
+          <span className="w-3 h-3 rounded-full bg-slate-200"></span>
           <span>No disponible</span>
         </div>
       </div>
 
       {/* Selection Summary Box */}
       {range.startDate && (
-        <div className="glass-card p-4 rounded-2xl bg-emerald-950/40 border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="space-y-1 text-center sm:text-left">
-            <div className="text-xs text-slate-400 font-medium">Fechas Seleccionadas</div>
-            <div className="text-sm font-bold text-white flex items-center gap-2 justify-center sm:justify-start">
+        <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-0.5 text-center sm:text-left">
+            <div className="text-[11px] text-rose-700 font-bold uppercase tracking-wider">Fechas Seleccionadas</div>
+            <div className="text-xs font-extrabold text-slate-900 flex items-center gap-2 justify-center sm:justify-start">
               <span>{format(range.startDate, 'dd MMM yyyy', { locale: es })}</span>
               {range.endDate ? (
                 <>
@@ -269,15 +265,15 @@ export default function Calendar({
                   <span>{format(range.endDate, 'dd MMM yyyy', { locale: es })}</span>
                 </>
               ) : (
-                <span className="text-amber-400 text-xs font-normal animate-pulse">(Seleccioná fecha de check-out)</span>
+                <span className="text-rose-500 text-xs font-normal animate-pulse">(Elegí salida)</span>
               )}
             </div>
           </div>
 
           {nightsCount > 0 && (
             <div className="text-right">
-              <div className="text-xs text-slate-400 font-medium">{nightsCount} Noche(s)</div>
-              <div className="text-lg font-extrabold text-amber-400">
+              <div className="text-[11px] text-slate-500 font-semibold">{nightsCount} Noche(s)</div>
+              <div className="text-base font-extrabold text-slate-900">
                 Total: {formatPriceTotal(nightsCount)}
               </div>
             </div>

@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Users, MapPin, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Users, MapPin, CheckCircle2, ArrowRight, Star, Heart } from 'lucide-react';
 
 export interface CabinData {
   id: string;
@@ -14,7 +14,7 @@ export interface CabinData {
   address: string;
   priceARS: number;
   priceUSD: number;
-  baseCurrency?: string; // 'ARS' or 'USD' (Configurado por el Administrador)
+  baseCurrency?: string; // 'ARS' or 'USD'
   amenities: string[];
   images: string[];
 }
@@ -27,82 +27,102 @@ export function formatCabinPrice(cabin: { priceARS: number; priceUSD: number; ba
 }
 
 export default function CabinCard({ cabin }: { cabin: CabinData }) {
-  const getCapacityColor = (cap: number) => {
-    if (cap <= 5) return 'from-emerald-500 to-teal-600';
-    if (cap <= 7) return 'from-cyan-500 to-blue-600';
-    return 'from-amber-500 to-orange-600';
-  };
+  const [liked, setLiked] = useState(false);
 
   return (
-    <div className="glass-card glass-card-hover rounded-3xl overflow-hidden flex flex-col h-full border border-white/10 group">
+    <div className="bg-white rounded-3xl overflow-hidden flex flex-col h-full border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 group">
       
-      {/* Image Container */}
-      <div className="relative h-64 w-full overflow-hidden">
+      {/* Airbnb Image Container */}
+      <div className="relative h-64 w-full overflow-hidden bg-slate-100">
         <Image
           src={cabin.images[0] || '/images/cabin-sendero.jpg'}
           alt={cabin.name}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-700"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+
+        {/* Favorite Heart Button */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setLiked(!liked);
+          }}
+          className="absolute top-4 right-4 p-2 rounded-full bg-white/80 hover:bg-white text-slate-700 shadow-sm transition-all hover:scale-110"
+          title="Guardar en favoritos"
+        >
+          <Heart className={`w-4 h-4 transition-colors ${liked ? 'fill-rose-500 text-rose-500' : 'text-slate-700'}`} />
+        </button>
 
         {/* Capacity Badge */}
         <div className="absolute top-4 left-4">
-          <span className={`px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-lg bg-gradient-to-r ${getCapacityColor(cabin.capacity)} flex items-center gap-1.5 backdrop-blur-md`}>
-            <Users className="w-3.5 h-3.5" /> Hasta {cabin.capacity} Personas
+          <span className="px-3 py-1.5 rounded-full text-xs font-extrabold text-slate-900 bg-white/90 backdrop-blur-md shadow-sm border border-slate-200/80 flex items-center gap-1.5">
+            <Users className="w-3.5 h-3.5 text-rose-500" /> Hasta {cabin.capacity} Huéspedes
           </span>
         </div>
 
-        {/* Price Tag Badge - Strictly configured by Admin */}
-        <div className="absolute bottom-4 right-4 bg-slate-950/85 backdrop-blur-md border border-white/10 px-4 py-2 rounded-2xl">
-          <div className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold text-right">Por noche</div>
-          <div className="text-xl font-extrabold text-amber-400">
-            {formatCabinPrice(cabin)}
-          </div>
+        {/* Airbnb Rating Badge */}
+        <div className="absolute bottom-4 left-4 bg-slate-900/85 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white shadow-md flex items-center gap-1">
+          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+          <span>4.98</span>
+          <span className="text-slate-300 text-[10px] font-normal">(28)</span>
         </div>
       </div>
 
-      {/* Content */}
+      {/* Content Section */}
       <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-        <div>
-          <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
-            {cabin.name}
-          </h3>
-          <p className="text-xs text-amber-400/90 flex items-center gap-1.5 mt-1 font-medium">
-            <MapPin className="w-3.5 h-3.5 shrink-0" /> {cabin.address}
+        <div className="space-y-2">
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="text-lg font-bold text-slate-900 group-hover:text-rose-500 transition-colors leading-snug">
+              {cabin.name}
+            </h3>
+          </div>
+
+          <p className="text-xs text-slate-500 flex items-center gap-1 font-medium">
+            <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" /> {cabin.address}
           </p>
-          <p className="text-slate-300 text-xs mt-3 line-clamp-2 leading-relaxed">
+
+          <p className="text-slate-600 text-xs line-clamp-2 leading-relaxed font-normal pt-1">
             {cabin.description}
           </p>
         </div>
 
-        {/* Top Amenities Pills */}
-        <div className="space-y-3 pt-2">
+        {/* Amenities & Price Section */}
+        <div className="space-y-4 pt-2 border-t border-slate-100">
           <div className="flex flex-wrap gap-1.5">
-            {cabin.amenities.slice(0, 4).map((amenity, idx) => (
+            {cabin.amenities.slice(0, 3).map((amenity, idx) => (
               <span
                 key={idx}
-                className="text-[11px] bg-white/5 border border-white/10 px-2.5 py-1 rounded-lg text-slate-300 flex items-center gap-1"
+                className="text-[11px] bg-slate-100 border border-slate-200/60 px-2.5 py-1 rounded-md text-slate-700 font-medium flex items-center gap-1"
               >
-                <CheckCircle2 className="w-3 h-3 text-emerald-400" /> {amenity}
+                <CheckCircle2 className="w-3 h-3 text-emerald-600" /> {amenity}
               </span>
             ))}
-            {cabin.amenities.length > 4 && (
-              <span className="text-[11px] bg-white/5 px-2 py-1 rounded-lg text-slate-400 font-medium">
-                +{cabin.amenities.length - 4} más
+            {cabin.amenities.length > 3 && (
+              <span className="text-[11px] bg-slate-100 px-2 py-1 rounded-md text-slate-500 font-medium">
+                +{cabin.amenities.length - 3} más
               </span>
             )}
           </div>
 
-          {/* Action Button */}
-          <Link
-            href={`/cabanas/${cabin.slug}`}
-            className="w-full mt-4 py-3 px-4 rounded-2xl font-bold text-xs bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-600/30 transition-all group-hover:translate-x-0.5"
-          >
-            Ver Detalle, Galería y Reservar
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          {/* Airbnb Price & Action Button */}
+          <div className="flex items-center justify-between pt-2">
+            <div>
+              <span className="text-xs text-slate-400 block font-medium">Precio por noche</span>
+              <span className="text-xl font-extrabold text-slate-900">
+                {formatCabinPrice(cabin)}
+              </span>
+            </div>
+
+            <Link
+              href={`/cabanas/${cabin.slug}`}
+              className="px-4 py-2.5 rounded-xl font-bold text-xs bg-rose-500 hover:bg-rose-600 text-white flex items-center gap-1.5 shadow-md transition-all hover:scale-105"
+            >
+              <span>Ver Cabaña</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
+
       </div>
 
     </div>

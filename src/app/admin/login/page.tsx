@@ -38,52 +38,52 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-[75vh] flex items-center justify-center px-4 py-12">
-      <div className="glass-card max-w-md w-full p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
+    <div className="min-h-[75vh] flex items-center justify-center px-4 py-12 bg-slate-50">
+      <div className="bg-white max-w-md w-full p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
         
         <div className="text-center space-y-3">
-          <div className="w-14 h-14 rounded-2xl gradient-forest flex items-center justify-center mx-auto shadow-lg">
-            <Trees className="w-8 h-8 text-emerald-400" />
+          <div className="w-12 h-12 rounded-2xl bg-rose-500 flex items-center justify-center mx-auto shadow-md">
+            <Trees className="w-7 h-7 text-white fill-current" />
           </div>
-          <h1 className="text-2xl font-extrabold text-white">Panel de Administración</h1>
-          <p className="text-xs text-slate-400">
-            Ingresá con tus credenciales de propietario para gestionar reservas, precios y sincronización.
+          <h1 className="text-2xl font-extrabold text-slate-900">Acceso Propietarios</h1>
+          <p className="text-xs text-slate-500">
+            Ingresá tus credenciales para administrar precios, bloquear fechas y gestionar reservas.
           </p>
         </div>
 
         {error && (
-          <div className="p-3.5 rounded-xl bg-rose-950/60 border border-rose-500/50 text-rose-300 text-xs font-semibold text-center">
+          <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-xs font-semibold text-center">
             {error}
           </div>
         )}
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Usuario Admin</label>
+            <label className="block text-xs font-bold text-slate-700 mb-1">Usuario Admin</label>
             <div className="relative">
-              <User className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
+              <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
               <input
                 type="text"
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="admin"
-                className="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-white/10 rounded-xl text-white text-xs focus:outline-none focus:border-emerald-500"
+                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-rose-500"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Contraseña</label>
+            <label className="block text-xs font-bold text-slate-700 mb-1">Contraseña</label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
+              <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-white/10 rounded-xl text-white text-xs focus:outline-none focus:border-emerald-500"
+                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-rose-500"
               />
             </div>
           </div>
@@ -91,16 +91,16 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 px-4 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center gap-2 shadow-lg transition-all"
+            className="w-full py-3.5 px-4 rounded-full font-bold text-xs bg-rose-500 hover:bg-rose-600 text-white flex items-center justify-center gap-2 shadow-md transition-all"
           >
-            {loading ? 'Iniciando sesión...' : 'Ingresar al Dashboard'}
+            {loading ? 'Iniciando sesión...' : 'Ingresar al Panel'}
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
 
-        <div className="p-3 rounded-xl bg-white/5 border border-white/5 text-[11px] text-slate-400 text-center">
-          Credenciales de acceso inicial: <br />
-          <span className="font-mono text-emerald-400">admin</span> / <span className="font-mono text-emerald-400">admin123</span>
+        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-500 text-center">
+          Credenciales iniciales: <br />
+          <span className="font-mono text-rose-500 font-bold">admin</span> / <span className="font-mono text-rose-500 font-bold">admin123</span>
         </div>
 
       </div>

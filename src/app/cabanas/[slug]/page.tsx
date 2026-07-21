@@ -14,6 +14,11 @@ import {
   Calendar as CalendarIcon,
   Sparkles,
   PhoneCall,
+  Star,
+  Award,
+  ShieldCheck,
+  Share2,
+  Heart,
 } from 'lucide-react';
 import Calendar from '@/components/Calendar';
 import PhotoCarousel from '@/components/PhotoCarousel';
@@ -55,8 +60,8 @@ export default function CabinDetailPage() {
   if (loading) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4">
-        <div className="w-12 h-12 rounded-full border-4 border-amber-400 border-t-transparent animate-spin" />
-        <p className="text-slate-400 text-sm font-medium">Cargando detalles de la cabaña...</p>
+        <div className="w-12 h-12 rounded-full border-4 border-rose-500 border-t-transparent animate-spin" />
+        <p className="text-slate-500 text-sm font-medium">Cargando cabaña...</p>
       </div>
     );
   }
@@ -64,9 +69,9 @@ export default function CabinDetailPage() {
   if (error || !cabin) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4 text-center px-4">
-        <h2 className="text-2xl font-bold text-rose-400">Cabaña no encontrada</h2>
-        <p className="text-slate-400 text-sm">No pudimos encontrar la información de esta cabaña.</p>
-        <Link href="/" className="px-6 py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs">
+        <h2 className="text-2xl font-bold text-rose-500">Cabaña no encontrada</h2>
+        <p className="text-slate-500 text-sm">No pudimos encontrar la información de esta cabaña.</p>
+        <Link href="/" className="px-6 py-2.5 rounded-full bg-rose-500 text-white font-bold text-xs">
           Volver al Catálogo
         </Link>
       </div>
@@ -74,54 +79,80 @@ export default function CabinDetailPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       
-      {/* Breadcrumb & Navigation */}
-      <div className="flex items-center justify-between">
+      {/* Breadcrumb & Airbnb Top Actions */}
+      <div className="flex items-center justify-between border-b border-slate-200 pb-4">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-amber-400 transition-colors"
+          className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-rose-500 transition-colors"
         >
-          <ArrowLeft className="w-4 h-4" /> Volver al Catálogo de Cabañas
+          <ArrowLeft className="w-4 h-4" /> Catálogo de Cabañas
         </Link>
-        <div className="text-xs text-slate-500">Santa Rosa de Calamuchita</div>
+        <div className="flex items-center gap-4 text-xs font-bold text-slate-700">
+          <span className="flex items-center gap-1 cursor-pointer hover:underline">
+            <Share2 className="w-3.5 h-3.5" /> Compartir
+          </span>
+          <span className="flex items-center gap-1 cursor-pointer hover:underline text-rose-500">
+            <Heart className="w-3.5 h-3.5 fill-current" /> Guardar
+          </span>
+        </div>
       </div>
 
-      {/* Main Grid: Header & Media */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      {/* Main Layout Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
         
-        {/* Left Col (2 cols): Details */}
-        <div className="lg:col-span-2 space-y-8">
+        {/* Left Column (2 cols): Photos & Listing Info */}
+        <div className="lg:col-span-2 space-y-10">
           
-          {/* Main Photo Carousel */}
+          {/* Main Photo Gallery */}
           <PhotoCarousel images={cabin.images} cabinName={cabin.name} />
 
-          {/* Title & Description */}
-          <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white">{cabin.name}</h1>
-            <p className="text-amber-400 text-sm font-semibold flex items-center gap-2">
-              <MapPin className="w-4 h-4" /> {cabin.address}
+          {/* Title & Superhost Header */}
+          <div className="space-y-4 border-b border-slate-200 pb-8">
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-1 rounded-full text-xs font-extrabold text-slate-900 bg-slate-100 border border-slate-200">
+                ★ 4.98 • 28 evaluaciones
+              </span>
+              <span className="px-3 py-1 rounded-full text-xs font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 flex items-center gap-1">
+                <Award className="w-3.5 h-3.5 text-emerald-600" /> Propietario Verificado
+              </span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900">{cabin.name}</h1>
+            
+            <p className="text-slate-600 text-sm font-medium flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-rose-500" /> {cabin.address}
             </p>
-            <p className="text-slate-300 text-sm leading-relaxed font-light">{cabin.description}</p>
+
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs font-medium text-slate-700">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-rose-500" />
+                <span>Capacidad máxima para {cabin.capacity} huéspedes</span>
+              </div>
+              <span className="text-emerald-600 font-bold">100% Equipado</span>
+            </div>
+
+            <p className="text-slate-700 text-sm leading-relaxed font-normal pt-2">{cabin.description}</p>
           </div>
 
-          {/* Equipamiento y Comodidades */}
-          <div className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-amber-400" />
-              Equipamiento y Comodidades
+          {/* Airbnb Style Amenities List */}
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+            <h3 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-rose-500" />
+              Lo que ofrece este alojamiento
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {cabin.amenities.map((item: string, idx: number) => (
-                <div key={idx} className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span className="text-xs font-semibold text-slate-200">{item}</span>
+                <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200/60">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span className="text-xs font-semibold text-slate-800">{item}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Mapa Interactivo y Puntos de Interés */}
+          {/* Interactive Map & Nearby Places */}
           <InteractiveMap
             cabinName={cabin.name}
             address={cabin.address}
@@ -133,61 +164,66 @@ export default function CabinDetailPage() {
 
         </div>
 
-        {/* Right Col (1 col): Calendar & Sticky Reservation Widget */}
+        {/* Right Column (1 col): Sticky Airbnb Reservation Card */}
         <div className="space-y-6 lg:sticky lg:top-24">
           
           {/* Price Header Card */}
-          <div className="glass-card p-6 rounded-3xl border border-white/10 space-y-4 gradient-emerald">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-amber-300 uppercase tracking-wider">Tarifa por Noche</span>
-              <span className="text-xs text-slate-200">Temporada 2026</span>
+          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-lg space-y-4">
+            <div className="flex items-baseline justify-between border-b border-slate-100 pb-4">
+              <div>
+                <span className="text-2xl font-extrabold text-slate-900">
+                  {formatCabinPrice(cabin)}
+                </span>
+                <span className="text-xs text-slate-500 ml-1 font-medium">/ noche</span>
+              </div>
+              <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+                ★ 4.98
+              </span>
             </div>
-            <div className="text-3xl font-extrabold text-amber-300">
-              {formatCabinPrice(cabin)}
-            </div>
-            <p className="text-[11px] text-slate-200 leading-tight">
-              Sin comisiones extra. Tarifa fija administrada directamente por los dueños.
+
+            <p className="text-xs text-slate-500 leading-normal">
+              Sin comisiones de plataforma. Alquiler directo gestionado por los dueños.
             </p>
+
+            {/* Availability Calendar */}
+            <Calendar
+              priceARS={cabin.priceARS}
+              priceUSD={cabin.priceUSD}
+              baseCurrency={cabin.baseCurrency || 'ARS'}
+              reservations={cabin.reservations || []}
+              blockedDates={cabin.blockedDates || []}
+              gcalEvents={cabin.gcalEvents || []}
+              onSelectRange={(range, nights) => {
+                setSelectedRange(range);
+                setNightsCount(nights);
+              }}
+            />
+
+            {/* Main Action Button */}
+            <button
+              disabled={!selectedRange.startDate || !selectedRange.endDate || nightsCount === 0}
+              onClick={() => setIsModalOpen(true)}
+              className={`w-full py-4 px-6 rounded-full font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all ${
+                selectedRange.startDate && selectedRange.endDate && nightsCount > 0
+                  ? 'bg-rose-500 hover:bg-rose-600 text-white hover:scale-105 shadow-rose-500/30'
+                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+              }`}
+            >
+              <CalendarIcon className="w-4 h-4" />
+              {selectedRange.startDate && selectedRange.endDate && nightsCount > 0
+                ? `Solicitar Reserva (${nightsCount} Noches)`
+                : 'Seleccioná Fechas en el Calendario'}
+            </button>
+
+            <a
+              href={`https://wa.me/5493546000000?text=Hola!%20Consulta%20directa%20por%20caba%C3%B1a%20${encodeURIComponent(cabin.name)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-3 px-4 rounded-full text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 flex items-center justify-center gap-2 transition-all"
+            >
+              <PhoneCall className="w-4 h-4 text-emerald-600" /> Consulta Directa por WhatsApp
+            </a>
           </div>
-
-          {/* Availability Calendar */}
-          <Calendar
-            priceARS={cabin.priceARS}
-            priceUSD={cabin.priceUSD}
-            baseCurrency={cabin.baseCurrency || 'ARS'}
-            reservations={cabin.reservations || []}
-            blockedDates={cabin.blockedDates || []}
-            gcalEvents={cabin.gcalEvents || []}
-            onSelectRange={(range, nights) => {
-              setSelectedRange(range);
-              setNightsCount(nights);
-            }}
-          />
-
-          {/* Action Trigger Button */}
-          <button
-            disabled={!selectedRange.startDate || !selectedRange.endDate || nightsCount === 0}
-            onClick={() => setIsModalOpen(true)}
-            className={`w-full py-4 px-6 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-2xl transition-all ${
-              selectedRange.startDate && selectedRange.endDate && nightsCount > 0
-                ? 'gradient-gold text-slate-950 hover:scale-105 shadow-amber-500/30'
-                : 'bg-slate-800 text-slate-500 cursor-not-allowed border border-white/5'
-            }`}
-          >
-            <CalendarIcon className="w-5 h-5" />
-            {selectedRange.startDate && selectedRange.endDate && nightsCount > 0
-              ? `Solicitar Reserva (${nightsCount} Noches)`
-              : 'Seleccioná Check-in y Check-out'}
-          </button>
-
-          <a
-            href={`https://wa.me/5493546000000?text=Hola!%20Consulta%20directa%20por%20caba%C3%B1a%20${encodeURIComponent(cabin.name)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-3 px-4 rounded-xl text-xs font-semibold glass-card text-amber-400 hover:text-white flex items-center justify-center gap-2 border-amber-500/20"
-          >
-            <PhoneCall className="w-4 h-4" /> Hacer consulta previa por WhatsApp
-          </a>
 
         </div>
 

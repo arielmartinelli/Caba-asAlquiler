@@ -50,7 +50,6 @@ export default function ReservationModal({
     setError('');
 
     try {
-      // 1. Save to DB via API
       const res = await fetch('/api/reservations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -74,7 +73,6 @@ export default function ReservationModal({
         throw new Error(data.error || 'Error al guardar la solicitud');
       }
 
-      // 2. Build WhatsApp message strictly formatted in cabin baseCurrency
       const formattedTotal = formatCabinPrice({
         priceARS: totalARS,
         priceUSD: totalUSD,
@@ -94,10 +92,10 @@ export default function ReservationModal({
 *Monto Total Estimado:* ${formattedTotal}
 *Notas:* ${notes || 'Sin observaciones'}
 --------------------------------------------------
-_Enviado desde el sitio web oficial de reservas._
+_Enviado desde la web de reservas._
       `.trim();
 
-      const waPhone = '5493546000000'; // Owner phone
+      const waPhone = '5493546000000';
       const waUrl = `https://wa.me/${waPhone}?text=${encodeURIComponent(textMessage)}`;
 
       setSubmitted(true);
@@ -113,18 +111,18 @@ _Enviado desde el sitio web oficial de reservas._
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
-      <div className="glass-card max-w-lg w-full rounded-3xl border border-white/10 overflow-hidden shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+      <div className="bg-white max-w-lg w-full rounded-3xl border border-slate-200 overflow-hidden shadow-2xl relative">
         
         {/* Header */}
-        <div className="p-6 border-b border-white/10 flex items-center justify-between gradient-emerald">
+        <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-300">Solicitud de Reserva</span>
-            <h3 className="text-xl font-bold text-white">{cabin.name}</h3>
+            <span className="text-[11px] font-extrabold uppercase tracking-wider text-rose-500">Solicitud de Reserva</span>
+            <h3 className="text-lg font-extrabold text-slate-900">{cabin.name}</h3>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+            className="p-2 rounded-full hover:bg-slate-200 text-slate-700 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -134,19 +132,19 @@ _Enviado desde el sitio web oficial de reservas._
         <div className="p-6">
           {submitted ? (
             <div className="text-center py-8 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-10 h-10 animate-bounce" />
               </div>
-              <h4 className="text-xl font-bold text-white">¡Solicitud Generada con Éxito!</h4>
-              <p className="text-slate-300 text-xs leading-relaxed max-w-sm mx-auto">
-                Tu solicitud fue registrada en el sistema del complejo. Abriendo WhatsApp para enviar los detalles al propietario...
+              <h4 className="text-xl font-extrabold text-slate-900">¡Solicitud Enviada!</h4>
+              <p className="text-slate-600 text-xs leading-relaxed max-w-sm mx-auto">
+                Tu solicitud fue registrada correctamente. Abriendo WhatsApp para enviar los detalles directamente al propietario...
               </p>
               <div className="pt-4">
                 <button
                   onClick={onClose}
-                  className="px-6 py-2.5 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-500 text-white"
+                  className="px-6 py-2.5 rounded-full font-bold text-xs bg-slate-900 text-white hover:bg-slate-800"
                 >
-                  Cerrar Ventana
+                  Cerrar
                 </button>
               </div>
             </div>
@@ -154,39 +152,39 @@ _Enviado desde el sitio web oficial de reservas._
             <form onSubmit={handleSubmit} className="space-y-4">
               
               {/* Summary box */}
-              <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between text-xs">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
                 <div>
-                  <div className="text-slate-400">Estadía:</div>
-                  <div className="font-bold text-white">
+                  <div className="text-slate-500 font-medium">Estadía:</div>
+                  <div className="font-bold text-slate-900">
                     {format(startDate, 'dd MMM', { locale: es })} ➔ {format(endDate, 'dd MMM yyyy', { locale: es })} ({nightsCount} noches)
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-slate-400">Monto Total:</div>
-                  <div className="font-extrabold text-amber-400 text-sm">
+                  <div className="text-slate-500 font-medium">Total:</div>
+                  <div className="font-extrabold text-slate-900 text-sm">
                     {formatCabinPrice({ priceARS: totalARS, priceUSD: totalUSD, baseCurrency: cabin.baseCurrency })}
                   </div>
                 </div>
               </div>
 
               {error && (
-                <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-500/50 text-rose-300 text-xs font-semibold">
+                <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-xs font-semibold">
                   {error}
                 </div>
               )}
 
               {/* Name */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Nombre Completo *</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Nombre Completo *</label>
                 <div className="relative">
-                  <User className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                  <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
                   <input
                     type="text"
                     required
                     value={clientName}
                     onChange={(e) => setClientName(e.target.value)}
                     placeholder="Ej. María González"
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-900/80 border border-white/10 rounded-xl text-white text-xs focus:outline-none focus:border-amber-400"
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-rose-500"
                   />
                 </div>
               </div>
@@ -194,30 +192,30 @@ _Enviado desde el sitio web oficial de reservas._
               {/* Email & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Email *</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Email *</label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                    <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
                     <input
                       type="email"
                       required
                       value={clientEmail}
                       onChange={(e) => setClientEmail(e.target.value)}
                       placeholder="maria@gmail.com"
-                      className="w-full pl-10 pr-3 py-2.5 bg-slate-900/80 border border-white/10 rounded-xl text-white text-xs focus:outline-none focus:border-amber-400"
+                      className="w-full pl-10 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-rose-500"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">WhatsApp / Celular *</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">WhatsApp *</label>
                   <div className="relative">
-                    <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                    <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
                     <input
                       type="tel"
                       required
                       value={clientPhone}
                       onChange={(e) => setClientPhone(e.target.value)}
                       placeholder="+54 9 351 1234567"
-                      className="w-full pl-10 pr-3 py-2.5 bg-slate-900/80 border border-white/10 rounded-xl text-white text-xs focus:outline-none focus:border-amber-400"
+                      className="w-full pl-10 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-rose-500"
                     />
                   </div>
                 </div>
@@ -225,11 +223,11 @@ _Enviado desde el sitio web oficial de reservas._
 
               {/* Guests Count */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   Cantidad de Huéspedes (Máx. {cabin.capacity}) *
                 </label>
                 <div className="relative">
-                  <UsersIcon className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                  <UsersIcon className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
                   <input
                     type="number"
                     min={1}
@@ -237,20 +235,20 @@ _Enviado desde el sitio web oficial de reservas._
                     required
                     value={guestsCount}
                     onChange={(e) => setGuestsCount(Math.min(cabin.capacity, Math.max(1, parseInt(e.target.value) || 1)))}
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-900/80 border border-white/10 rounded-xl text-white text-xs focus:outline-none focus:border-amber-400"
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-rose-500"
                   />
                 </div>
               </div>
 
               {/* Notes */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Comentarios / Consultas</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Comentarios / Observaciones</label>
                 <textarea
                   rows={2}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Ej. Horario estimado de llegada, viajo con mascota pequeña, etc."
-                  className="w-full p-3 bg-slate-900/80 border border-white/10 rounded-xl text-white text-xs focus:outline-none focus:border-amber-400 resize-none"
+                  placeholder="Ej. Horario aproximado de llegada, consulta por mascota, etc."
+                  className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-rose-500 resize-none"
                 />
               </div>
 
@@ -258,21 +256,21 @@ _Enviado desde el sitio web oficial de reservas._
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 px-4 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center gap-2 shadow-lg transition-all"
+                className="w-full py-3.5 px-4 rounded-full font-bold text-xs bg-rose-500 hover:bg-rose-600 text-white flex items-center justify-center gap-2 shadow-md transition-all"
               >
                 {loading ? (
                   <span>Procesando...</span>
                 ) : (
                   <>
                     <MessageSquare className="w-4 h-4" />
-                    Enviar Solicitud vía WhatsApp
+                    Confirmar Solicitud vía WhatsApp
                   </>
                 )}
               </button>
 
-              <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 pt-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Sin cargos por adelantado. El dueño confirmará tu reserva.</span>
+              <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 pt-1 font-medium">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Trato directo con el propietario. Sin comisión extra.</span>
               </div>
 
             </form>

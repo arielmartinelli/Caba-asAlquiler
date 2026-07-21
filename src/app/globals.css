@@ -2,84 +2,105 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@400;500;600;700;800&family=Bricolage+Grotesk:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --font-heading: 'Outfit', 'Bricolage Grotesk', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Airbnb Design Tokens */
+  --airbnb-black: #222222;
+  --airbnb-gray-dark: #717171;
+  --airbnb-gray-light: #b0b0b0;
+  --airbnb-border: #dddddd;
+  --airbnb-bg-subtle: #f7f7f7;
+  --airbnb-brand: #ff385c;
+  --airbnb-brand-hover: #e00b41;
+  --airbnb-emerald: #008489;
+  --airbnb-gold: #ffb400;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: #080c14;
-  color: #f8fafc;
+  background-color: #fcfcfc;
+  color: #222222;
   overflow-x: hidden;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  letter-spacing: -0.025em;
+  color: #222222;
+  letter-spacing: -0.02em;
 }
 
-/* Minimalist Modern Glass Card */
-.glass-card {
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Airbnb Style Card */
+.airbnb-card {
+  background: #ffffff;
+  border: 1px solid #ebebeb;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
 }
 
-.glass-card-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-card-hover:hover {
+.airbnb-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(245, 158, 11, 0.35);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 20px 0px rgba(245, 158, 11, 0.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  border-color: #d1d1d1;
 }
 
-/* Refined Minimalist Text Gradient */
-.gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 40%, #f59e0b 80%, #10b981 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Floating Search Bar / Pill */
+.airbnb-search-bar {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 40px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
 }
 
-.gradient-gold {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+.airbnb-search-bar:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
 }
 
-.gradient-emerald {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+/* Primary Button (Airbnb Coral/Rose or Emerald) */
+.airbnb-btn-primary {
+  background: linear-gradient(135deg, #e51e54 0%, #d70466 100%);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.875rem;
+  transition: all 0.2s ease;
 }
 
-.hero-pattern {
-  background-image: radial-gradient(rgba(245, 158, 11, 0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
+.airbnb-btn-primary:hover {
+  background: linear-gradient(135deg, #d70466 0%, #bd0055 100%);
+  box-shadow: 0 6px 16px rgba(215, 4, 102, 0.3);
 }
 
-/* Custom Minimalist Scrollbar */
+.airbnb-btn-emerald {
+  background: linear-gradient(135deg, #008489 0%, #00666a 100%);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.airbnb-btn-emerald:hover {
+  background: linear-gradient(135deg, #00666a 0%, #004d50 100%);
+  box-shadow: 0 6px 16px rgba(0, 132, 137, 0.3);
+}
+
+/* Custom Airbnb Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #080c14;
+  background: #f7f7f7;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #cccccc;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  background: #ff385c;
 }

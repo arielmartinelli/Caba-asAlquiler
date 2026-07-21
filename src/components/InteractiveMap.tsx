@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MapPin, Navigation, Compass, Sparkles, ExternalLink, Waves, Utensils, Mountain } from 'lucide-react';
+import { MapPin, Navigation, Compass, ExternalLink, Waves, Mountain } from 'lucide-react';
 
 interface InteractiveMapProps {
   cabinName: string;
@@ -22,22 +22,21 @@ export default function InteractiveMap({
 }: InteractiveMapProps) {
   const [activeTab, setActiveTab] = useState<'near' | 'far'>('near');
 
-  // Google Maps Search / OpenStreetMap embed URL
   const mapEmbedUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&hl=es&z=15&output=embed`;
   const googleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
 
   return (
-    <div className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
+    <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-600 text-xs font-bold uppercase tracking-wider mb-2">
             <MapPin className="w-3.5 h-3.5" /> Ubicación Exacta
           </div>
-          <h3 className="text-2xl font-extrabold text-white">{cabinName}</h3>
-          <p className="text-xs text-slate-300 flex items-center gap-1.5 mt-1 font-medium">
-            <Navigation className="w-4 h-4 text-amber-400 shrink-0" />
+          <h3 className="text-2xl font-extrabold text-slate-900">{cabinName}</h3>
+          <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-1 font-medium">
+            <Navigation className="w-4 h-4 text-slate-400 shrink-0" />
             {address}
           </p>
         </div>
@@ -46,42 +45,42 @@ export default function InteractiveMap({
           href={googleMapsDirectionsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-5 py-3 rounded-2xl font-bold text-xs bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-105 shrink-0"
+          className="px-5 py-3 rounded-full font-bold text-xs bg-slate-900 hover:bg-slate-800 text-white flex items-center justify-center gap-2 shadow-md transition-all hover:scale-105 shrink-0"
         >
-          <span>Cómo Llegar (Google Maps)</span>
-          <ExternalLink className="w-4 h-4" />
+          <span>Abrir Google Maps</span>
+          <ExternalLink className="w-3.5 h-3.5" />
         </a>
       </div>
 
       {/* Embedded Map Container */}
-      <div className="relative w-full h-[320px] sm:h-[400px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+      <div className="relative w-full h-[320px] sm:h-[380px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
         <iframe
           title={`Mapa de ubicación de ${cabinName}`}
           src={mapEmbedUrl}
           width="100%"
           height="100%"
-          style={{ border: 0, filter: 'contrast(1.05) saturate(1.1)' }}
+          style={{ border: 0 }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
 
-        {/* Floating Custom Badge */}
-        <div className="absolute top-4 left-4 bg-slate-950/90 backdrop-blur-md px-4 py-2 rounded-xl border border-amber-500/40 text-xs font-bold text-white shadow-xl flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
+        {/* Floating Airbnb Pin Badge */}
+        <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full border border-slate-200 text-xs font-bold text-slate-900 shadow-md flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping" />
           <span>{cabinName}</span>
         </div>
       </div>
 
-      {/* Points of Interest Tabs & Grid */}
+      {/* Points of Interest Tabs */}
       <div className="space-y-4 pt-2">
-        <div className="flex items-center gap-3 border-b border-white/10 pb-3">
+        <div className="flex items-center gap-3 border-b border-slate-100 pb-3">
           <button
             onClick={() => setActiveTab('near')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 ${
               activeTab === 'near'
-                ? 'bg-amber-500 text-slate-950 shadow-lg'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-rose-500 text-white shadow-sm'
+                : 'text-slate-600 hover:bg-slate-100'
             }`}
           >
             <Waves className="w-4 h-4" />
@@ -89,10 +88,10 @@ export default function InteractiveMap({
           </button>
           <button
             onClick={() => setActiveTab('far')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 ${
               activeTab === 'far'
-                ? 'bg-emerald-600 text-white shadow-lg'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-slate-900 text-white shadow-sm'
+                : 'text-slate-600 hover:bg-slate-100'
             }`}
           >
             <Mountain className="w-4 h-4" />
@@ -105,13 +104,13 @@ export default function InteractiveMap({
           {(activeTab === 'near' ? nearPoints : farPoints).map((pt, idx) => (
             <div
               key={idx}
-              className="p-3.5 rounded-2xl bg-slate-900/60 border border-white/5 flex items-center justify-between gap-3 hover:border-amber-500/30 transition-all"
+              className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3 hover:border-slate-300 transition-all"
             >
               <div className="flex items-center gap-2.5">
-                <Compass className="w-4 h-4 text-amber-400 shrink-0" />
-                <span className="text-xs font-bold text-white">{pt.name}</span>
+                <Compass className="w-4 h-4 text-slate-500 shrink-0" />
+                <span className="text-xs font-bold text-slate-900">{pt.name}</span>
               </div>
-              <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-500/20 shrink-0">
+              <span className="text-[11px] font-bold text-slate-700 bg-white px-2.5 py-1 rounded-full border border-slate-200 shrink-0 shadow-2xs">
                 {pt.distance}
               </span>
             </div>

@@ -95,14 +95,14 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="es" className="dark scroll-smooth">
+    <html lang="es" className="scroll-smooth">
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased">
+      <body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
         <CurrencyProvider>
           <Navbar />
           <main className="flex-1">{children}</main>
