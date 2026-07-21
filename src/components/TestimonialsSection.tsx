@@ -93,7 +93,9 @@ export default function TestimonialsSection() {
               <div className="space-y-0.5">
                 <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
                   {item.name}
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" title="Reserva Verificada" />
+                  <span title="Reserva Verificada">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  </span>
                 </h4>
                 <div className="text-[11px] text-amber-400 font-medium">{item.cabin}</div>
                 <div className="text-[10px] text-slate-400">{item.location} • {item.date}</div>
