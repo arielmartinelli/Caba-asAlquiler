@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Cabin {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  name         String
+  capacity     Int
+  description  String
+  address      String
+  latitude     Float
+  longitude    Float
+  priceARS     Float
+  priceUSD     Float
+  baseCurrency String        @default("ARS") // ARS or USD
+  amenities    String        // JSON array of strings
+  nearPoints   String        // JSON array of objects { name, distance }
+  farPoints    String        // JSON array of objects { name, distance }
+  images       String        // JSON array of image URLs
+  reservations Reservation[]
+  blockedDates BlockedDate[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Reservation {
+  id           String   @id @default(cuid())
+  cabinId      String
+  cabin        Cabin    @relation(fields: [cabinId], references: [id], onDelete: Cascade)
+  clientName   String
+  clientEmail  String
+  clientPhone  String
+  guestsCount  Int
+  startDate    DateTime
+  endDate      DateTime
+  totalARS     Float
+  totalUSD     Float
+  status       String   @default("PENDING") // PENDING, APPROVED, REJECTED, CANCELLED
+  gcalEventId  String?
+  notes        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model BlockedDate {
+  id        String   @id @default(cuid())
+  cabinId   String
+  cabin     Cabin    @relation(fields: [cabinId], references: [id], onDelete: Cascade)
+  startDate DateTime
+  endDate   DateTime
+  reason    String?
+  createdAt DateTime @default(now())
+}
+
+model AdminUser {
+  id       String @id @default(cuid())
+  username String @unique
+  password String
+}
