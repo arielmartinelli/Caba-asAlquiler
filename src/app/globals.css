@@ -7,17 +7,6 @@
 :root {
   --font-heading: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Inter', sans-serif;
-  
-  /* Airbnb Design Tokens */
-  --airbnb-black: #222222;
-  --airbnb-gray-dark: #717171;
-  --airbnb-gray-light: #b0b0b0;
-  --airbnb-border: #dddddd;
-  --airbnb-bg-subtle: #f7f7f7;
-  --airbnb-brand: #ff385c;
-  --airbnb-brand-hover: #e00b41;
-  --airbnb-emerald: #008489;
-  --airbnb-gold: #ffb400;
 }
 
 body {
@@ -27,67 +16,61 @@ body {
   overflow-x: hidden;
   letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  color: #222222;
-  letter-spacing: -0.02em;
+.dark body {
+  background-color: #0b0f19;
+  color: #f1f5f9;
 }
 
-/* Airbnb Style Card */
-.airbnb-card {
-  background: #ffffff;
-  border: 1px solid #ebebeb;
-  border-radius: 1.25rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-  transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
-}
-
-.airbnb-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-  border-color: #d1d1d1;
-}
-
-/* Floating Search Bar / Pill */
-.airbnb-search-bar {
-  background: #ffffff;
-  border: 1px solid #dddddd;
-  border-radius: 40px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-  transition: all 0.2s ease;
-}
-
-.airbnb-search-bar:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
-}
-
-/* Primary Button (Airbnb Coral/Rose or Emerald) */
-.airbnb-btn-primary {
-  background: linear-gradient(135deg, #e51e54 0%, #d70466 100%);
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
   color: #ffffff;
-  font-weight: 600;
-  border-radius: 0.875rem;
-  transition: all 0.2s ease;
 }
 
-.airbnb-btn-primary:hover {
-  background: linear-gradient(135deg, #d70466 0%, #bd0055 100%);
-  box-shadow: 0 6px 16px rgba(215, 4, 102, 0.3);
+/* Dark Mode Airbnb Overrides */
+.dark .airbnb-search-bar {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
 }
 
-.airbnb-btn-emerald {
-  background: linear-gradient(135deg, #008489 0%, #00666a 100%);
+.dark .bg-white {
+  background-color: #111827;
+  border-color: #1f2937;
+  color: #f3f4f6;
+}
+
+.dark .bg-slate-50 {
+  background-color: #0b0f19;
+}
+
+.dark .text-slate-900 {
   color: #ffffff;
-  font-weight: 600;
-  border-radius: 0.875rem;
-  transition: all 0.2s ease;
 }
 
-.airbnb-btn-emerald:hover {
-  background: linear-gradient(135deg, #00666a 0%, #004d50 100%);
-  box-shadow: 0 6px 16px rgba(0, 132, 137, 0.3);
+.dark .text-slate-700 {
+  color: #e2e8f0;
+}
+
+.dark .text-slate-600 {
+  color: #cbd5e1;
+}
+
+.dark .text-slate-500 {
+  color: #94a3b8;
+}
+
+.dark .border-slate-200 {
+  border-color: #1f2937;
+}
+
+.dark .border-slate-100 {
+  border-color: #111827;
+}
+
+.dark .bg-slate-100 {
+  background-color: #1f2937;
 }
 
 /* Custom Airbnb Scrollbar */
@@ -97,9 +80,15 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-track {
   background: #f7f7f7;
 }
+.dark ::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
 ::-webkit-scrollbar-thumb {
   background: #cccccc;
   border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #ff385c;

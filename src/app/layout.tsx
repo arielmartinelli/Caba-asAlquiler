@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { CurrencyProvider } from '@/components/CurrencyContext';
+import { ThemeProvider } from '@/components/ThemeContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -102,12 +103,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
-        <CurrencyProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </CurrencyProvider>
+      <body className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col antialiased transition-colors duration-300">
+        <ThemeProvider>
+          <CurrencyProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </CurrencyProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

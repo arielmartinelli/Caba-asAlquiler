@@ -2,16 +2,18 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Trees, MapPin, UserCheck, Menu, X, PhoneCall, Search, Globe, Heart } from 'lucide-react';
+import { Trees, MapPin, UserCheck, Menu, X, PhoneCall, Search, Globe, Sun, Moon } from 'lucide-react';
 import WeatherWidget from './WeatherWidget';
 import { useCurrency } from './CurrencyContext';
+import { useTheme } from './ThemeContext';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currency, setCurrency } = useCurrency();
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
+    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
@@ -22,24 +24,24 @@ export default function Navbar() {
             </div>
             <div>
               <span className="text-lg sm:text-xl font-extrabold tracking-tight text-rose-500 block leading-tight">
-                cabañas<span className="text-slate-900 font-bold">calamuchita</span>
+                cabañas<span className="text-slate-900 dark:text-white font-bold">calamuchita</span>
               </span>
-              <span className="text-[11px] text-slate-500 flex items-center gap-1 font-medium">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1 font-medium">
                 <MapPin className="w-3 h-3 text-rose-500" /> Santa Rosa de Calamuchita
               </span>
             </div>
           </Link>
 
           {/* Airbnb Floating Search Pill */}
-          <div className="hidden md:flex items-center gap-3 airbnb-search-bar px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm">
+          <div className="hidden md:flex items-center gap-3 airbnb-search-bar px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 dark:bg-slate-800 dark:border-slate-700 shadow-sm">
             <a href="#catalogo" className="px-3 py-1 hover:text-rose-500 transition-colors">
               Cabañas (3)
             </a>
-            <span className="text-slate-300">|</span>
+            <span className="text-slate-300 dark:text-slate-600">|</span>
             <a href="#ubicacion" className="px-3 py-1 hover:text-rose-500 transition-colors">
               Ubicación
             </a>
-            <span className="text-slate-300">|</span>
+            <span className="text-slate-300 dark:text-slate-600">|</span>
             <a href="#faq" className="px-3 py-1 hover:text-rose-500 transition-colors">
               Preguntas
             </a>
@@ -49,18 +51,31 @@ export default function Navbar() {
           </div>
 
           {/* Right Menu Controls */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
             
             {/* Weather Badge */}
             <WeatherWidget />
 
+            {/* Theme Toggle Button (Light/Dark Switcher) */}
+            <button
+              onClick={toggleTheme}
+              className="p-2.5 rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-amber-400 transition-all"
+              title={theme === 'light' ? 'Cambiar a Modo Oscuro' : 'Cambiar a Modo Claro'}
+            >
+              {theme === 'light' ? (
+                <Moon className="w-4 h-4 text-slate-700" />
+              ) : (
+                <Sun className="w-4 h-4 text-amber-400" />
+              )}
+            </button>
+
             {/* Currency Selector (ARS / USD) */}
             <button
               onClick={() => setCurrency(currency === 'ARS' ? 'USD' : 'ARS')}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-full border border-slate-200 hover:border-slate-400 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-all"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
               title="Cambiar moneda"
             >
-              <Globe className="w-4 h-4 text-slate-500" />
+              <Globe className="w-4 h-4 text-slate-500 dark:text-slate-400" />
               <span>{currency === 'ARS' ? '$ ARS' : 'US$ USD'}</span>
             </button>
 
@@ -77,7 +92,7 @@ export default function Navbar() {
             {/* Admin Login Button */}
             <Link
               href="/admin/login"
-              className="p-2.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 transition-all"
+              className="p-2.5 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all"
               title="Acceso Administración"
             >
               <UserCheck className="w-4 h-4" />
@@ -85,16 +100,22 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-3">
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-amber-400"
+            >
+              {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4 text-amber-400" />}
+            </button>
             <button
               onClick={() => setCurrency(currency === 'ARS' ? 'USD' : 'ARS')}
-              className="px-2.5 py-1.5 rounded-full border border-slate-200 text-xs font-bold text-slate-700"
+              className="px-2.5 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200"
             >
               {currency}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-full text-slate-700 hover:bg-slate-100 border border-slate-200"
+              className="p-2 rounded-full text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -104,25 +125,25 @@ export default function Navbar() {
 
       {/* Mobile dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-slate-200 px-6 pt-4 pb-6 space-y-4 shadow-xl">
+        <div className="md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 pt-4 pb-6 space-y-4 shadow-xl">
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}
-            className="block text-base font-semibold text-slate-900 hover:text-rose-500"
+            className="block text-base font-semibold text-slate-900 dark:text-white hover:text-rose-500"
           >
             Inicio & Cabañas
           </Link>
           <a
             href="#catalogo"
             onClick={() => setMobileMenuOpen(false)}
-            className="block text-base font-semibold text-slate-900 hover:text-rose-500"
+            className="block text-base font-semibold text-slate-900 dark:text-white hover:text-rose-500"
           >
             Nuestras 3 Cabañas
           </a>
           <a
             href="#ubicacion"
             onClick={() => setMobileMenuOpen(false)}
-            className="block text-base font-semibold text-slate-900 hover:text-rose-500"
+            className="block text-base font-semibold text-slate-900 dark:text-white hover:text-rose-500"
           >
             Ubicación & Mapa
           </a>
@@ -137,7 +158,7 @@ export default function Navbar() {
           <Link
             href="/admin/login"
             onClick={() => setMobileMenuOpen(false)}
-            className="block text-center py-2.5 rounded-full text-xs font-bold text-slate-700 border border-slate-300"
+            className="block text-center py-2.5 rounded-full text-xs font-bold text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700"
           >
             Panel Propietario / Admin
           </Link>
