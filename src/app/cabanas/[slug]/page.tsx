@@ -18,6 +18,7 @@ import {
 import Calendar from '@/components/Calendar';
 import PhotoCarousel from '@/components/PhotoCarousel';
 import ReservationModal from '@/components/ReservationModal';
+import InteractiveMap from '@/components/InteractiveMap';
 import { formatCabinPrice } from '@/components/CabinCard';
 
 export default function CabinDetailPage() {
@@ -120,47 +121,15 @@ export default function CabinDetailPage() {
             </div>
           </div>
 
-          {/* Puntos de Interés (Cercanos y Lejanos) */}
-          <div className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-              <Navigation className="w-5 h-5 text-emerald-400" />
-              Ubicación y Puntos de Interés
-            </h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              
-              {/* Cercanos */}
-              <div className="space-y-3">
-                <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <Compass className="w-4 h-4" /> Qué hay cerca (Caminando / 2 min)
-                </h4>
-                <div className="space-y-2">
-                  {cabin.nearPoints.map((pt: any, idx: number) => (
-                    <div key={idx} className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20 flex justify-between items-center text-xs">
-                      <span className="text-slate-200 font-medium">{pt.name}</span>
-                      <span className="font-bold text-amber-400 bg-amber-950/80 px-2 py-0.5 rounded-md text-[11px]">{pt.distance}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Lejanos */}
-              <div className="space-y-3">
-                <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4" /> Paseos Turísticos Cercanos
-                </h4>
-                <div className="space-y-2">
-                  {cabin.farPoints.map((pt: any, idx: number) => (
-                    <div key={idx} className="p-3 rounded-xl bg-slate-900/60 border border-white/5 flex justify-between items-center text-xs">
-                      <span className="text-slate-300">{pt.name}</span>
-                      <span className="font-semibold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-md text-[11px]">{pt.distance}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-          </div>
+          {/* Mapa Interactivo y Puntos de Interés */}
+          <InteractiveMap
+            cabinName={cabin.name}
+            address={cabin.address}
+            latitude={cabin.latitude}
+            longitude={cabin.longitude}
+            nearPoints={cabin.nearPoints || []}
+            farPoints={cabin.farPoints || []}
+          />
 
         </div>
 

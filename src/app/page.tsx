@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { db } from '@/lib/db';
 import CabinCard, { CabinData } from '@/components/CabinCard';
+import TestimonialsSection from '@/components/TestimonialsSection';
+import FAQSection from '@/components/FAQSection';
 import { Trees, MapPin, Sparkles, Compass, ShieldCheck, HeartHandshake, CheckCircle2, ChevronRight, PhoneCall } from 'lucide-react';
 
 export const revalidate = 0; // Dynamic rendering
@@ -117,6 +119,9 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Testimoniales de Huéspedes */}
+      <TestimonialsSection />
+
       {/* Ubicación & Puntos de Interés */}
       <section id="ubicacion" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="glass-card p-8 md:p-12 rounded-3xl border border-white/10 relative overflow-hidden space-y-8">
@@ -181,6 +186,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Preguntas Frecuentes FAQ */}
+      <FAQSection />
 
     </div>
   );

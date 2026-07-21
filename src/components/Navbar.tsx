@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Trees, MapPin, UserCheck, Menu, X, PhoneCall } from 'lucide-react';
+import WeatherWidget from './WeatherWidget';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -26,6 +27,9 @@ export default function Navbar() {
               </span>
             </div>
           </Link>
+
+          {/* Weather Widget */}
+          <WeatherWidget />
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">

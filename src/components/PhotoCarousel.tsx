@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, Maximize2, X, Camera } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Maximize2, Camera } from 'lucide-react';
+import LightboxModal from './LightboxModal';
 
 interface PhotoCarouselProps {
   images: string[];
@@ -15,11 +16,13 @@ export default function PhotoCarousel({ images = [], cabinName }: PhotoCarouselP
 
   const photoList = images.length > 0 ? images : ['/images/cabin-sendero.jpg'];
 
-  const prevSlide = () => {
+  const prevSlide = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     setCurrentIndex((prev) => (prev === 0 ? photoList.length - 1 : prev - 1));
   };
 
-  const nextSlide = () => {
+  const nextSlide = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     setCurrentIndex((prev) => (prev === photoList.length - 1 ? 0 : prev + 1));
   };
 
@@ -27,7 +30,10 @@ export default function PhotoCarousel({ images = [], cabinName }: PhotoCarouselP
     <div className="space-y-4">
       
       {/* Main Image Container */}
-      <div className="relative h-[420px] sm:h-[480px] w-full rounded-3xl overflow-hidden glass-card border border-white/10 shadow-2xl group">
+      <div
+        onClick={() => setLightboxOpen(true)}
+        className="relative h-[420px] sm:h-[480px] w-full rounded-3xl overflow-hidden glass-card border border-white/10 shadow-2xl group cursor-zoom-in"
+      >
         <Image
           src={photoList[currentIndex]}
           alt={`${cabinName} - Foto ${currentIndex + 1}`}
@@ -47,8 +53,11 @@ export default function PhotoCarousel({ images = [], cabinName }: PhotoCarouselP
 
         {/* Fullscreen Expand Button */}
         <button
-          onClick={() => setLightboxOpen(true)}
-          className="absolute top-4 right-4 p-2.5 rounded-full bg-slate-950/80 hover:bg-amber-500 text-white hover:text-slate-950 transition-all backdrop-blur-md border border-white/10"
+          onClick={(e) => {
+            e.stopPropagation();
+            setLightboxOpen(true);
+          }}
+          className="absolute top-4 right-4 p-2.5 rounded-full bg-slate-950/80 hover:bg-amber-500 text-white hover:text-slate-950 transition-all backdrop-blur-md border border-white/10 shadow-lg"
           title="Ver en pantalla completa"
         >
           <Maximize2 className="w-4 h-4" />
@@ -59,13 +68,13 @@ export default function PhotoCarousel({ images = [], cabinName }: PhotoCarouselP
           <>
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-slate-950/70 hover:bg-amber-500 text-white hover:text-slate-950 transition-all backdrop-blur-md border border-white/10 opacity-90 hover:opacity-100 hover:scale-110"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-slate-950/70 hover:bg-amber-500 text-white hover:text-slate-950 transition-all backdrop-blur-md border border-white/10 opacity-90 hover:opacity-100 hover:scale-110 shadow-xl"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-slate-950/70 hover:bg-amber-500 text-white hover:text-slate-950 transition-all backdrop-blur-md border border-white/10 opacity-90 hover:opacity-100 hover:scale-110"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-slate-950/70 hover:bg-amber-500 text-white hover:text-slate-950 transition-all backdrop-blur-md border border-white/10 opacity-90 hover:opacity-100 hover:scale-110 shadow-xl"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -93,42 +102,13 @@ export default function PhotoCarousel({ images = [], cabinName }: PhotoCarouselP
       )}
 
       {/* Fullscreen Lightbox Modal */}
-      {lightboxOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-xl flex items-center justify-center p-4">
-          <button
-            onClick={() => setLightboxOpen(false)}
-            className="absolute top-6 right-6 p-3 rounded-full bg-white/10 text-white hover:bg-rose-600 transition-colors"
-          >
-            <X className="w-6 h-6" />
-          </button>
-
-          <div className="relative w-full max-w-5xl h-[80vh]">
-            <Image
-              src={photoList[currentIndex]}
-              alt={`${cabinName} Fullscreen`}
-              fill
-              className="object-contain"
-            />
-          </div>
-
-          {photoList.length > 1 && (
-            <>
-              <button
-                onClick={prevSlide}
-                className="absolute left-6 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/10 hover:bg-amber-500 text-white hover:text-slate-950 transition-all"
-              >
-                <ChevronLeft className="w-8 h-8" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="absolute right-6 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/10 hover:bg-amber-500 text-white hover:text-slate-950 transition-all"
-              >
-                <ChevronRight className="w-8 h-8" />
-              </button>
-            </>
-          )}
-        </div>
-      )}
+      <LightboxModal
+        images={photoList}
+        currentIndex={currentIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onSelectIndex={(idx) => setCurrentIndex(idx)}
+      />
 
     </div>
   );
