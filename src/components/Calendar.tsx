@@ -27,7 +27,7 @@ interface Range {
 interface CalendarProps {
   priceARS: number;
   priceUSD: number;
-  baseCurrency?: string; // 'ARS' or 'USD'
+  baseCurrency?: string;
   reservations: { startDate: string; endDate: string; status: string }[];
   blockedDates: { startDate: string; endDate: string; reason?: string }[];
   gcalEvents: { start: string; end: string; summary: string }[];
@@ -163,22 +163,22 @@ export default function Calendar({
           key={cloneDay.toISOString()}
           disabled={blocked || !isCurrentMonth}
           onClick={() => handleDateClick(cloneDay)}
-          className={`h-11 w-full rounded-full flex flex-col items-center justify-center relative transition-all text-xs font-semibold ${
+          className={`h-11 w-full rounded-full flex flex-col items-center justify-center relative transition-all text-xs font-bold ${
             !isCurrentMonth ? 'opacity-20 cursor-default' : ''
           } ${
             blocked
-              ? 'bg-slate-100 text-slate-300 line-through cursor-not-allowed border border-slate-200/50'
+              ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 line-through cursor-not-allowed border border-slate-200/60 dark:border-slate-700/60'
               : isSelectedStart || isSelectedEnd
               ? 'bg-rose-500 text-white font-extrabold shadow-md scale-105 z-10'
               : isInRange
-              ? 'bg-rose-50 text-rose-900 border border-rose-200'
-              : 'hover:bg-slate-100 text-slate-800 hover:scale-105 border border-transparent'
+              ? 'bg-rose-100 dark:bg-rose-950/80 text-rose-900 dark:text-rose-200 border border-rose-300 dark:border-rose-800 font-bold'
+              : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 hover:scale-105 border border-transparent font-semibold'
           }`}
           title={blocked ? `No disponible: ${reason}` : format(cloneDay, 'dd MMMM yyyy', { locale: es })}
         >
           <span>{format(cloneDay, 'd')}</span>
           {blocked && isCurrentMonth && (
-            <Lock className="w-2.5 h-2.5 text-slate-400 absolute bottom-1" />
+            <Lock className="w-2.5 h-2.5 text-slate-400 dark:text-slate-500 absolute bottom-1" />
           )}
         </button>
       );
@@ -196,11 +196,11 @@ export default function Calendar({
     range.startDate && range.endDate ? differenceInDays(range.endDate, range.startDate) : 0;
 
   return (
-    <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-6">
+    <div className="bg-white dark:bg-[#151c28] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-6">
       
       {/* Header with Month Selector */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-slate-900">
+        <div className="flex items-center gap-2 text-slate-900 dark:text-white">
           <CalendarIcon className="w-5 h-5 text-rose-500" />
           <h3 className="font-extrabold text-base capitalize">
             {format(currentMonth, 'MMMM yyyy', { locale: es })}
@@ -209,13 +209,13 @@ export default function Calendar({
         <div className="flex items-center gap-1.5">
           <button
             onClick={prevMonth}
-            className="p-2 rounded-full hover:bg-slate-100 text-slate-700 transition-colors border border-slate-200"
+            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-colors border border-slate-200 dark:border-slate-700"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             onClick={nextMonth}
-            className="p-2 rounded-full hover:bg-slate-100 text-slate-700 transition-colors border border-slate-200"
+            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-colors border border-slate-200 dark:border-slate-700"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
@@ -223,7 +223,7 @@ export default function Calendar({
       </div>
 
       {/* Weekday headers */}
-      <div className="grid grid-cols-7 gap-1 text-center text-xs font-bold text-slate-400 uppercase tracking-wider">
+      <div className="grid grid-cols-7 gap-1 text-center text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
         <span>Lu</span>
         <span>Ma</span>
         <span>Mi</span>
@@ -237,9 +237,9 @@ export default function Calendar({
       <div className="space-y-1">{rows}</div>
 
       {/* Legend */}
-      <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-500 pt-4 border-t border-slate-100 gap-2">
+      <div className="flex flex-wrap items-center justify-between text-xs text-slate-700 dark:text-slate-300 font-semibold pt-4 border-t border-slate-200 dark:border-slate-800 gap-2">
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-slate-100 border border-slate-300"></span>
+          <span className="w-3 h-3 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600"></span>
           <span>Disponible</span>
         </div>
         <div className="flex items-center gap-1.5">
@@ -247,33 +247,33 @@ export default function Calendar({
           <span>Seleccionado</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-slate-200"></span>
+          <span className="w-3 h-3 rounded-full bg-slate-200 dark:bg-slate-700"></span>
           <span>No disponible</span>
         </div>
       </div>
 
       {/* Selection Summary Box */}
       {range.startDate && (
-        <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-0.5 text-center sm:text-left">
-            <div className="text-[11px] text-rose-700 font-bold uppercase tracking-wider">Fechas Seleccionadas</div>
-            <div className="text-xs font-extrabold text-slate-900 flex items-center gap-2 justify-center sm:justify-start">
-              <span>{format(range.startDate, 'dd MMM yyyy', { locale: es })}</span>
+            <div className="text-[11px] text-rose-700 dark:text-rose-400 font-extrabold uppercase tracking-wider">Fechas Seleccionadas</div>
+            <div className="text-xs font-extrabold text-slate-900 dark:text-white flex items-center gap-2 justify-center sm:justify-start">
+              <span>{format(range.startDate, 'dd MMM', { locale: es })}</span>
               {range.endDate ? (
                 <>
                   <span>➔</span>
                   <span>{format(range.endDate, 'dd MMM yyyy', { locale: es })}</span>
                 </>
               ) : (
-                <span className="text-rose-500 text-xs font-normal animate-pulse">(Elegí salida)</span>
+                <span className="text-rose-500 dark:text-rose-400 text-xs font-semibold animate-pulse">(Elegí salida)</span>
               )}
             </div>
           </div>
 
           {nightsCount > 0 && (
             <div className="text-right">
-              <div className="text-[11px] text-slate-500 font-semibold">{nightsCount} Noche(s)</div>
-              <div className="text-base font-extrabold text-slate-900">
+              <div className="text-xs text-slate-700 dark:text-slate-300 font-bold">{nightsCount} Noche(s)</div>
+              <div className="text-base font-extrabold text-slate-900 dark:text-white">
                 Total: {formatPriceTotal(nightsCount)}
               </div>
             </div>

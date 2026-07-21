@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Star, Quote, CheckCircle2, Award } from 'lucide-react';
+import { Star, CheckCircle2, Award } from 'lucide-react';
 
 interface Testimonial {
   name: string;
@@ -32,7 +32,7 @@ export default function TestimonialsSection() {
       date: 'Febrero 2026',
       rating: 5,
       comment:
-        'Tener bajada directa al río Santa Rosa fue lo mejor de las vacaciones. Los chicos disfrutaron de la piscina y los adultos del asador con vista a la agua. 100% recomendable, volveremos seguro.',
+        'Tener bajada directa al río Santa Rosa fue lo mejor de las vacaciones. Los chicos disfrutaron de la piscina y los adultos del asador con vista al agua. 100% recomendable, volveremos seguro.',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
     },
     {
@@ -50,13 +50,13 @@ export default function TestimonialsSection() {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="text-center space-y-3 mb-10">
-        <div className="inline-flex items-center gap-1.5 text-xs font-extrabold text-rose-500 uppercase tracking-widest bg-rose-50 px-3.5 py-1.5 rounded-full border border-rose-200">
+        <div className="inline-flex items-center gap-1.5 text-xs font-extrabold text-rose-600 dark:text-rose-400 uppercase tracking-widest bg-rose-50 dark:bg-rose-950/60 px-3.5 py-1.5 rounded-full border border-rose-200 dark:border-rose-800/60">
           <Award className="w-4 h-4 text-rose-500" /> Evaluación 4.98 ★★★★★
         </div>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
           Opiniones de nuestros huéspedes
         </h2>
-        <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto font-normal">
+        <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm max-w-xl mx-auto font-medium">
           Reseñas auténticas de quienes disfrutaron sus vacaciones en nuestras cabañas.
         </p>
       </div>
@@ -65,7 +65,7 @@ export default function TestimonialsSection() {
         {testimonials.map((item, idx) => (
           <div
             key={idx}
-            className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-all"
+            className="bg-white dark:bg-[#151c28] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between hover:shadow-md transition-all"
           >
             <div className="space-y-3">
               <div className="flex items-center gap-1">
@@ -74,26 +74,26 @@ export default function TestimonialsSection() {
                 ))}
               </div>
 
-              <p className="text-xs text-slate-700 leading-relaxed italic">
+              <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed italic font-normal">
                 "{item.comment}"
               </p>
             </div>
 
-            <div className="flex items-center gap-3 pt-4 mt-4 border-t border-slate-100">
+            <div className="flex items-center gap-3 pt-4 mt-4 border-t border-slate-100 dark:border-slate-800">
               <img
                 src={item.avatar}
                 alt={item.name}
-                className="w-10 h-10 rounded-full object-cover border-2 border-rose-200"
+                className="w-10 h-10 rounded-full object-cover border-2 border-rose-400"
               />
               <div>
-                <h4 className="text-xs font-bold text-slate-900 flex items-center gap-1">
+                <h4 className="text-xs font-extrabold text-slate-900 dark:text-white flex items-center gap-1">
                   {item.name}
                   <span title="Reserva Verificada">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                   </span>
                 </h4>
-                <div className="text-[11px] text-rose-500 font-semibold">{item.cabin}</div>
-                <div className="text-[10px] text-slate-400">{item.location} • {item.date}</div>
+                <div className="text-[11px] text-rose-500 font-extrabold">{item.cabin}</div>
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">{item.location} • {item.date}</div>
               </div>
             </div>
           </div>

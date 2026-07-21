@@ -1,22 +1,17 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import {
   Users,
   MapPin,
   CheckCircle2,
-  Navigation,
-  Compass,
   ArrowLeft,
   Calendar as CalendarIcon,
   Sparkles,
   PhoneCall,
-  Star,
   Award,
-  ShieldCheck,
   Share2,
   Heart,
 } from 'lucide-react';
@@ -61,7 +56,7 @@ export default function CabinDetailPage() {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4">
         <div className="w-12 h-12 rounded-full border-4 border-rose-500 border-t-transparent animate-spin" />
-        <p className="text-slate-500 text-sm font-medium">Cargando cabaña...</p>
+        <p className="text-slate-600 dark:text-slate-400 text-sm font-semibold">Cargando cabaña...</p>
       </div>
     );
   }
@@ -69,8 +64,8 @@ export default function CabinDetailPage() {
   if (error || !cabin) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4 text-center px-4">
-        <h2 className="text-2xl font-bold text-rose-500">Cabaña no encontrada</h2>
-        <p className="text-slate-500 text-sm">No pudimos encontrar la información de esta cabaña.</p>
+        <h2 className="text-2xl font-extrabold text-rose-500">Cabaña no encontrada</h2>
+        <p className="text-slate-600 dark:text-slate-400 text-sm">No pudimos encontrar la información de esta cabaña.</p>
         <Link href="/" className="px-6 py-2.5 rounded-full bg-rose-500 text-white font-bold text-xs">
           Volver al Catálogo
         </Link>
@@ -82,14 +77,14 @@ export default function CabinDetailPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       
       {/* Breadcrumb & Airbnb Top Actions */}
-      <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-rose-500 transition-colors"
+          className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-rose-500 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" /> Catálogo de Cabañas
         </Link>
-        <div className="flex items-center gap-4 text-xs font-bold text-slate-700">
+        <div className="flex items-center gap-4 text-xs font-bold text-slate-700 dark:text-slate-300">
           <span className="flex items-center gap-1 cursor-pointer hover:underline">
             <Share2 className="w-3.5 h-3.5" /> Compartir
           </span>
@@ -109,44 +104,44 @@ export default function CabinDetailPage() {
           <PhotoCarousel images={cabin.images} cabinName={cabin.name} />
 
           {/* Title & Superhost Header */}
-          <div className="space-y-4 border-b border-slate-200 pb-8">
+          <div className="space-y-4 border-b border-slate-200 dark:border-slate-800 pb-8">
             <div className="flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-extrabold text-slate-900 bg-slate-100 border border-slate-200">
+              <span className="px-3.5 py-1 rounded-full text-xs font-extrabold text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
                 ★ 4.98 • 28 evaluaciones
               </span>
-              <span className="px-3 py-1 rounded-full text-xs font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 flex items-center gap-1">
-                <Award className="w-3.5 h-3.5 text-emerald-600" /> Propietario Verificado
+              <span className="px-3.5 py-1 rounded-full text-xs font-extrabold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 flex items-center gap-1">
+                <Award className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> Propietario Verificado
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900">{cabin.name}</h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">{cabin.name}</h1>
             
-            <p className="text-slate-600 text-sm font-medium flex items-center gap-2">
+            <p className="text-slate-700 dark:text-slate-300 text-sm font-semibold flex items-center gap-2">
               <MapPin className="w-4 h-4 text-rose-500" /> {cabin.address}
             </p>
 
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs font-medium text-slate-700">
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200">
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-rose-500" />
                 <span>Capacidad máxima para {cabin.capacity} huéspedes</span>
               </div>
-              <span className="text-emerald-600 font-bold">100% Equipado</span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-extrabold">100% Equipado</span>
             </div>
 
-            <p className="text-slate-700 text-sm leading-relaxed font-normal pt-2">{cabin.description}</p>
+            <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-normal pt-2">{cabin.description}</p>
           </div>
 
           {/* Airbnb Style Amenities List */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
-            <h3 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+          <div className="bg-white dark:bg-[#151c28] p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+            <h3 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-rose-500" />
               Lo que ofrece este alojamiento
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {cabin.amenities.map((item: string, idx: number) => (
-                <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200/60">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span className="text-xs font-semibold text-slate-800">{item}</span>
+                <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                  <span className="text-xs font-bold text-slate-900 dark:text-slate-100">{item}</span>
                 </div>
               ))}
             </div>
@@ -168,20 +163,20 @@ export default function CabinDetailPage() {
         <div className="space-y-6 lg:sticky lg:top-24">
           
           {/* Price Header Card */}
-          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-lg space-y-4">
-            <div className="flex items-baseline justify-between border-b border-slate-100 pb-4">
+          <div className="bg-white dark:bg-[#151c28] p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg space-y-4">
+            <div className="flex items-baseline justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
               <div>
-                <span className="text-2xl font-extrabold text-slate-900">
+                <span className="text-2xl font-extrabold text-slate-900 dark:text-white">
                   {formatCabinPrice(cabin)}
                 </span>
-                <span className="text-xs text-slate-500 ml-1 font-medium">/ noche</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 ml-1 font-semibold">/ noche</span>
               </div>
-              <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+              <span className="text-xs font-extrabold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-3 py-1 rounded-full border border-amber-200 dark:border-amber-800/60">
                 ★ 4.98
               </span>
             </div>
 
-            <p className="text-xs text-slate-500 leading-normal">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-normal font-medium">
               Sin comisiones de plataforma. Alquiler directo gestionado por los dueños.
             </p>
 
@@ -205,8 +200,8 @@ export default function CabinDetailPage() {
               onClick={() => setIsModalOpen(true)}
               className={`w-full py-4 px-6 rounded-full font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all ${
                 selectedRange.startDate && selectedRange.endDate && nightsCount > 0
-                  ? 'bg-rose-500 hover:bg-rose-600 text-white hover:scale-105 shadow-rose-500/30'
-                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                  ? 'btn-airbnb shadow-rose-500/30'
+                  : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed'
               }`}
             >
               <CalendarIcon className="w-4 h-4" />
@@ -219,9 +214,9 @@ export default function CabinDetailPage() {
               href={`https://wa.me/5493546000000?text=Hola!%20Consulta%20directa%20por%20caba%C3%B1a%20${encodeURIComponent(cabin.name)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 px-4 rounded-full text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 flex items-center justify-center gap-2 transition-all"
+              className="w-full py-3 px-4 rounded-full text-xs font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 flex items-center justify-center gap-2 transition-all"
             >
-              <PhoneCall className="w-4 h-4 text-emerald-600" /> Consulta Directa por WhatsApp
+              <PhoneCall className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Consulta Directa por WhatsApp
             </a>
           </div>
 
