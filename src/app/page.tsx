@@ -108,9 +108,6 @@ export default async function HomePage() {
  Nuestras 3 Cabañas en Calamuchita
  </h2>
  </div>
- <p className="text-slate-500 text-[11px] max-w-md mt-1 font-medium">
- Seleccioná la opción perfecta según la cantidad de personas y disfrutá de unas vacaciones inolvidables.
- </p>
  </div>
 
  {/* Cabins Grid */}
