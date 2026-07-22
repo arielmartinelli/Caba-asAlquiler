@@ -103,7 +103,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col antialiased transition-colors duration-300">
+      <body className="bg-white dark:bg-[#0c1017] text-slate-950 dark:text-slate-100 min-h-screen flex flex-col antialiased transition-colors duration-300">
         <ThemeProvider>
           <CurrencyProvider>
             <Navbar />

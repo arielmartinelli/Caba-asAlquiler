@@ -53,10 +53,10 @@ export default function TestimonialsSection() {
         <div className="inline-flex items-center gap-1.5 text-xs font-extrabold text-rose-600 dark:text-rose-400 uppercase tracking-widest bg-rose-50 dark:bg-rose-950/60 px-3.5 py-1.5 rounded-full border border-rose-200 dark:border-rose-800/60">
           <Award className="w-4 h-4 text-rose-500" /> Evaluación 4.98 ★★★★★
         </div>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white">
           Opiniones de nuestros huéspedes
         </h2>
-        <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm max-w-xl mx-auto font-medium">
+        <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm max-w-xl mx-auto font-medium">
           Reseñas auténticas de quienes disfrutaron sus vacaciones en nuestras cabañas.
         </p>
       </div>
@@ -74,7 +74,7 @@ export default function TestimonialsSection() {
                 ))}
               </div>
 
-              <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed italic font-normal">
+              <p className="text-xs text-slate-900 dark:text-slate-200 leading-relaxed italic font-normal">
                 "{item.comment}"
               </p>
             </div>
@@ -86,7 +86,7 @@ export default function TestimonialsSection() {
                 className="w-10 h-10 rounded-full object-cover border-2 border-rose-400"
               />
               <div>
-                <h4 className="text-xs font-extrabold text-slate-900 dark:text-white flex items-center gap-1">
+                <h4 className="text-xs font-extrabold text-slate-950 dark:text-white flex items-center gap-1">
                   {item.name}
                   <span title="Reserva Verificada">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />

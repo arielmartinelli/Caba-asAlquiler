@@ -33,33 +33,33 @@ export default async function HomePage() {
     <div className="space-y-16 pb-16">
       
       {/* Airbnb Hero Banner */}
-      <section className="relative py-16 sm:py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0c1017] dark:via-[#111827] dark:to-[#0c1017] border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+      <section className="relative py-16 sm:py-24 bg-white dark:bg-[#0c1017] border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 text-center space-y-8">
           
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800/60 text-rose-600 dark:text-rose-400 text-xs font-extrabold uppercase tracking-wider shadow-xs">
             <Award className="w-4 h-4 text-rose-500" /> Alquiler Directo sin Comisiones
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight max-w-4xl mx-auto">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-tight max-w-4xl mx-auto">
             Encontrá tu cabaña ideal en las <span className="text-rose-500">Sierras de Córdoba</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
             3 Cabañas exclusivas equipadas para 5, 7 y 10 personas en Santa Rosa de Calamuchita. Vistas panorámicas a la montaña, bajada al río, piscina y parrilla.
           </p>
 
           {/* Airbnb Search Box Floating Container */}
           <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 p-3 rounded-full border border-slate-200 dark:border-slate-800 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="px-6 py-2 text-left sm:border-r border-slate-200 dark:border-slate-800 w-full">
-              <span className="text-[10px] font-bold text-slate-900 dark:text-white uppercase tracking-wider block">Ubicación</span>
+              <span className="text-[10px] font-bold text-slate-950 dark:text-white uppercase tracking-wider block">Ubicación</span>
               <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Santa Rosa de Calamuchita</span>
             </div>
             <div className="px-6 py-2 text-left sm:border-r border-slate-200 dark:border-slate-800 w-full">
-              <span className="text-[10px] font-bold text-slate-900 dark:text-white uppercase tracking-wider block">Capacidad</span>
+              <span className="text-[10px] font-bold text-slate-950 dark:text-white uppercase tracking-wider block">Capacidad</span>
               <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Hasta 10 Huéspedes</span>
             </div>
             <div className="px-6 py-2 text-left w-full">
-              <span className="text-[10px] font-bold text-slate-900 dark:text-white uppercase tracking-wider block">Garantía</span>
+              <span className="text-[10px] font-bold text-slate-950 dark:text-white uppercase tracking-wider block">Garantía</span>
               <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">Trato Directo Propietario</span>
             </div>
             <a
@@ -73,7 +73,7 @@ export default async function HomePage() {
           {/* Airbnb Key Benefits Bar */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 text-left max-w-4xl mx-auto">
             <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-1">
-              <div className="text-slate-900 dark:text-white font-bold text-sm flex items-center gap-1.5">
+              <div className="text-slate-950 dark:text-white font-bold text-sm flex items-center gap-1.5">
                 <Star className="w-4 h-4 fill-amber-400 text-amber-400" /> 4.98 Estrellas
               </div>
               <div className="text-slate-500 dark:text-slate-400 text-xs">Evaluación de huéspedes</div>
@@ -85,7 +85,7 @@ export default async function HomePage() {
               <div className="text-slate-500 dark:text-slate-400 text-xs">Directo con los dueños</div>
             </div>
             <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-1">
-              <div className="text-slate-900 dark:text-white font-bold text-sm">Río y Montaña</div>
+              <div className="text-slate-950 dark:text-white font-bold text-sm">Río y Montaña</div>
               <div className="text-slate-500 dark:text-slate-400 text-xs">Ubicaciones estratégicas</div>
             </div>
             <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-1">
@@ -104,11 +104,11 @@ export default async function HomePage() {
             <span className="text-xs font-bold text-rose-500 uppercase tracking-widest bg-rose-50 dark:bg-rose-950/60 px-3.5 py-1.5 rounded-full border border-rose-200 dark:border-rose-800/60">
               Cabañas Exclusivas
             </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-2">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-950 dark:text-white mt-2">
               Nuestras 3 Cabañas en Calamuchita
             </h2>
           </div>
-          <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm max-w-md">
+          <p className="text-slate-700 dark:text-slate-400 text-xs sm:text-sm max-w-md">
             Seleccioná la opción perfecta según la cantidad de personas y disfrutá de unas vacaciones inolvidables.
           </p>
         </div>
@@ -128,17 +128,17 @@ export default async function HomePage() {
 
       {/* Ubicación & Puntos de Interés */}
       <section id="ubicacion" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white dark:bg-slate-900 p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs space-y-8">
+        <div className="bg-white dark:bg-slate-900 p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-8">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div className="space-y-6">
               <span className="text-xs font-bold text-rose-500 uppercase tracking-widest bg-rose-50 dark:bg-rose-950/60 px-3.5 py-1.5 rounded-full border border-rose-200 dark:border-rose-800/60">
                 Ubicación Inmejorable
               </span>
-              <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white">
+              <h3 className="text-3xl font-extrabold text-slate-950 dark:text-white">
                 Santa Rosa de Calamuchita: Naturaleza, Gastronomía y Río
               </h3>
-              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
                 Ubicadas en puntos estratégicos del Valle de Calamuchita, nuestras cabañas combinan acceso directo al río Santa Rosa con cercanía al centro comercial y atractivos turísticos.
               </p>
 
@@ -146,14 +146,14 @@ export default async function HomePage() {
                 <div className="flex items-start gap-3">
                   <Compass className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">Atracciones Cercanas (A pie)</h4>
+                    <h4 className="text-sm font-bold text-slate-950 dark:text-white">Atracciones Cercanas (A pie)</h4>
                     <p className="text-xs text-slate-500 dark:text-slate-400">Río Santa Rosa, Balneario El Puchuqui, Paseo del Remanso, restaurantes tradicionales.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">Paseos de Calamuchita</h4>
+                    <h4 className="text-sm font-bold text-slate-950 dark:text-white">Paseos de Calamuchita</h4>
                     <p className="text-xs text-slate-500 dark:text-slate-400">Villa General Belgrano (10 min), Cerro Vía Crucis, La Cumbrecita, Reserva La Cascada.</p>
                   </div>
                 </div>
@@ -162,11 +162,11 @@ export default async function HomePage() {
 
             {/* Visual Box */}
             <div className="bg-slate-50 dark:bg-slate-800/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 space-y-4">
-              <h4 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <h4 className="text-base font-bold text-slate-950 dark:text-white flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 Garantía de Alquiler Directo
               </h4>
-              <ul className="space-y-3 text-xs text-slate-600 dark:text-slate-300">
+              <ul className="space-y-3 text-xs text-slate-700 dark:text-slate-300">
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   <span>Trato 100% directo con los dueños sin comisiones extras.</span>
