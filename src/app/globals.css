@@ -14,10 +14,12 @@
   --airbnb-border: #DDDDDD;
 }
 
-/* ===== BASE TYPOGRAPHY & LAYOUT ===== */
+/* ===== BASE TYPOGRAPHY & LAYOUT WITH TRANSLUCENT PINE PATTERN ===== */
 body {
   font-family: var(--font-body);
-  background-color: #ffffff;
+  background-color: #fcfcfc;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%231b4332' fill-opacity='0.035' d='M50 12 L60 30 L54 30 L64 45 L58 45 L68 62 L53 62 L53 72 L47 72 L47 62 L32 62 L42 45 L36 45 L46 30 L40 30 Z M90 60 L96 72 L92 72 L98 82 L82 82 L82 88 L78 88 L78 82 L62 82 L68 72 L64 72 L70 60 Z M10 60 L16 72 L12 72 L18 82 L2 82 L2 88 L-2 88 L-2 82 L-18 82 L-12 72 L-16 72 L-10 60 Z'/%3E%3C/svg%3E");
+  background-attachment: fixed;
   color: var(--airbnb-text);
   overflow-x: hidden;
   letter-spacing: -0.012em;
