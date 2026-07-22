@@ -40,7 +40,7 @@ export default async function HomePage() {
  <Award className="w-4 h-4 text-rose-500" /> Alquiler Directo sin Comisiones
  </div>
 
- <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-950 leading-tight max-w-4xl mx-auto">
+ <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-slate-950 leading-tight max-w-4xl mx-auto">
  Encontrá tu cabaña ideal en las <span className="text-rose-500">Sierras de Córdoba</span>
  </h1>
 
@@ -49,16 +49,16 @@ export default async function HomePage() {
  </p>
 
  {/* Airbnb Search Box Floating Container */}
- <div className="max-w-3xl mx-auto bg-white p-3 rounded-full border border-slate-200 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3">
- <div className="px-6 py-2 text-left sm:border-r border-slate-200 w-full">
+ <div className="max-w-3xl mx-auto bg-white p-3 rounded-3xl sm:rounded-full border border-slate-200 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+ <div className="px-6 py-3 sm:py-2 text-left border-b sm:border-b-0 sm:border-r border-slate-200 w-full">
  <span className="text-[10px] font-bold text-slate-950 uppercase tracking-wider block">Ubicación</span>
  <span className="text-xs text-slate-500 font-medium">Santa Rosa de Calamuchita</span>
  </div>
- <div className="px-6 py-2 text-left sm:border-r border-slate-200 w-full">
+ <div className="px-6 py-3 sm:py-2 text-left border-b sm:border-b-0 sm:border-r border-slate-200 w-full">
  <span className="text-[10px] font-bold text-slate-950 uppercase tracking-wider block">Capacidad</span>
  <span className="text-xs text-slate-500 font-medium">Hasta 10 Huéspedes</span>
  </div>
- <div className="px-6 py-2 text-left w-full">
+ <div className="px-6 py-3 sm:py-2 text-left w-full">
  <span className="text-[10px] font-bold text-slate-950 uppercase tracking-wider block">Garantía</span>
  <span className="text-xs font-bold text-emerald-600 ">Trato Directo Propietario</span>
  </div>
@@ -71,26 +71,26 @@ export default async function HomePage() {
  </div>
 
  {/* Airbnb Key Benefits Bar */}
- <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 text-left max-w-4xl mx-auto">
- <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
- <div className="text-slate-950 font-bold text-sm flex items-center gap-1.5">
+ <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-8 text-left max-w-4xl mx-auto">
+ <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
+ <div className="text-slate-950 font-bold text-[13px] sm:text-sm flex items-center gap-1.5">
  <Star className="w-4 h-4 fill-amber-400 text-amber-400" /> 4.98 Estrellas
  </div>
- <div className="text-slate-500 text-xs">Evaluación de huéspedes</div>
+ <div className="text-slate-500 text-[10px] sm:text-xs">Evaluación de huéspedes</div>
  </div>
- <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
- <div className="text-emerald-600 font-bold text-sm flex items-center gap-1.5">
+ <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
+ <div className="text-emerald-600 font-bold text-[13px] sm:text-sm flex items-center gap-1.5">
  <Shield className="w-4 h-4" /> Reserva Segura
  </div>
- <div className="text-slate-500 text-xs">Directo con los dueños</div>
+ <div className="text-slate-500 text-[10px] sm:text-xs">Directo con los dueños</div>
  </div>
- <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
- <div className="text-slate-950 font-bold text-sm">Río y Montaña</div>
- <div className="text-slate-500 text-xs">Ubicaciones estratégicas</div>
+ <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
+ <div className="text-slate-950 font-bold text-[13px] sm:text-sm">Río y Montaña</div>
+ <div className="text-slate-500 text-[10px] sm:text-xs">Ubicaciones estratégicas</div>
  </div>
- <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
- <div className="text-rose-500 font-bold text-sm">Google Calendar</div>
- <div className="text-slate-500 text-xs">Sincro de disponibilidad</div>
+ <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
+ <div className="text-rose-500 font-bold text-[13px] sm:text-sm">Sincronización</div>
+ <div className="text-slate-500 text-[10px] sm:text-xs">Disponibilidad real</div>
  </div>
  </div>
 

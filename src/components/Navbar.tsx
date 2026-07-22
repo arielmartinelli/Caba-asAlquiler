@@ -19,7 +19,7 @@ export default function Navbar() {
  <Trees className="w-5 h-5 fill-current" />
  </div>
  <div>
- <span className="text-xl font-extrabold tracking-tight text-slate-950 block leading-tight">
+ <span className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-950 block leading-tight">
  cabañas<span className="text-rose-500">calamuchita</span>
  </span>
  <span className="text-[11px] text-slate-600 flex items-center gap-1 font-medium">
@@ -86,25 +86,25 @@ export default function Navbar() {
 
  {/* Mobile Menu Dropdown */}
  {mobileMenuOpen && (
- <div className="md:hidden bg-white border-t border-slate-200 px-6 pt-4 pb-6 space-y-4 shadow-xl">
+ <div className="md:hidden bg-white border-t border-slate-200 px-5 pt-6 pb-8 space-y-5 shadow-xl">
  <Link
  href="/"
  onClick={() => setMobileMenuOpen(false)}
- className="block text-base font-bold text-slate-950 hover:text-rose-500"
+ className="block py-2 text-base font-bold text-slate-950 hover:text-rose-500"
  >
  Inicio & Cabañas
  </Link>
  <a
  href="#catalogo"
  onClick={() => setMobileMenuOpen(false)}
- className="block text-base font-bold text-slate-950 hover:text-rose-500"
+ className="block py-2 text-base font-bold text-slate-950 hover:text-rose-500"
  >
  Nuestras 3 Cabañas
  </a>
  <a
  href="#ubicacion"
  onClick={() => setMobileMenuOpen(false)}
- className="block text-base font-bold text-slate-950 hover:text-rose-500"
+ className="block py-2 text-base font-bold text-slate-950 hover:text-rose-500"
  >
  Ubicación & Mapa
  </a>
