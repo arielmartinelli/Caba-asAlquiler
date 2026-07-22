@@ -17,6 +17,8 @@ import {
   Upload,
   Plus,
   Trash2,
+  ArrowLeft,
+  ArrowRight,
   Image as ImageIcon,
 } from 'lucide-react';
 import Image from 'next/image';
@@ -179,6 +181,38 @@ export default function AdminDashboardPage() {
       fetchData();
     } catch (err) {
       console.error('Error deleting photo:', err);
+    }
+  };
+
+  const handleMovePhoto = async (cabinId: string, photoIdx: number, direction: 'left' | 'right') => {
+    try {
+      const currentImages = [...(cabinSettings[cabinId]?.images || [])];
+      
+      if (direction === 'left' && photoIdx > 0) {
+        const temp = currentImages[photoIdx];
+        currentImages[photoIdx] = currentImages[photoIdx - 1];
+        currentImages[photoIdx - 1] = temp;
+      } else if (direction === 'right' && photoIdx < currentImages.length - 1) {
+        const temp = currentImages[photoIdx];
+        currentImages[photoIdx] = currentImages[photoIdx + 1];
+        currentImages[photoIdx + 1] = temp;
+      } else {
+        return;
+      }
+
+      setCabinSettings({
+        ...cabinSettings,
+        [cabinId]: { ...cabinSettings[cabinId], images: currentImages },
+      });
+
+      await fetch(`/api/admin/cabins/${cabinId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ images: currentImages }),
+      });
+      fetchData();
+    } catch (err) {
+      console.error('Error moving photo:', err);
     }
   };
 
@@ -654,9 +688,32 @@ export default function AdminDashboardPage() {
                     {currentImages.map((img: string, idx: number) => (
                       <div key={idx} className="relative h-28 rounded-xl overflow-hidden group border border-slate-300 shadow-xs">
                         <Image src={img} alt={`Foto ${idx + 1}`} fill className="object-cover" />
+                        
+                        {/* Reorder Left */}
+                        {idx > 0 && (
+                          <button
+                            onClick={() => handleMovePhoto(cabin.id, idx, 'left')}
+                            className="absolute top-1/2 left-1 -translate-y-1/2 p-1.5 rounded-full bg-slate-900/70 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                            title="Mover a la izquierda"
+                          >
+                            <ArrowLeft className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+
+                        {/* Reorder Right */}
+                        {idx < currentImages.length - 1 && (
+                          <button
+                            onClick={() => handleMovePhoto(cabin.id, idx, 'right')}
+                            className="absolute top-1/2 right-1 -translate-y-1/2 p-1.5 rounded-full bg-slate-900/70 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                            title="Mover a la derecha"
+                          >
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+
                         <button
                           onClick={() => handleDeletePhoto(cabin.id, idx)}
-                          className="absolute top-2 right-2 p-1.5 rounded-full bg-rose-600 text-white opacity-0 group-hover:opacity-100 transition-opacity shadow"
+                          className="absolute top-1 right-1 p-1.5 rounded-full bg-rose-600 text-white opacity-0 group-hover:opacity-100 transition-opacity shadow"
                           title="Eliminar foto"
                         >
                           <Trash2 className="w-3.5 h-3.5" />

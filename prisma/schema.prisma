@@ -64,3 +64,10 @@ model AdminUser {
   username String @unique
   password String
 }
+
+model StoredImage {
+  id        String   @id @default(cuid())
+  data      String   // Base64 encoded image data
+  mimeType  String   // e.g. "image/jpeg"
+  createdAt DateTime @default(now())
+}
